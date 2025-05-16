@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             // POZOR: '/api/search' je relativní cesta k vašemu backendu
             // Při nasazení budete mít plnou URL vašeho backend serveru
-            const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+            const response = await fetch(`https://search-backend-pi.vercel.app/api/search?q=${encodeURIComponent(query)}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
