@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vlastní Vyhledávání</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="Logo" id="logo"> <!- Vložte si logo ->
+            <form id="search-form">
+                <input type="text" id="search-query" name="q" placeholder="Hledat...">
+                <button type="submit">Hledat</button>
+            </form>
+        </header>
+
+        <main>
+            <div id="ai-summary-container" style="display:none;">
+                <h2>AI Shrnutí (Gemini):</h2>
+                <div id="ai-summary" class="result-box">Načítám AI odpověď...</div>
+            </div>
+
+            <div id="google-results-container">
+                <h2>Výsledky vyhledávání:</h2>
+                <div id="google-results" class="result-box">Načítám výsledky...</div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
