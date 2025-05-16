@@ -4,30 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vlastní Vyhledávání</title>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* You can add custom base styles or component styles here if needed */
+        /* For example, to ensure body takes full height for flex layouts */
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: sans-serif; /* Basic font */
+        }
+        .search-result-item { /* Custom class for individual search results if needed beyond Tailwind */
+            border-bottom: 1px solid #e2e8f0; /* Tailwind: border-b border-gray-200 */
+            padding-bottom: 1rem; /* Tailwind: pb-4 */
+            margin-bottom: 1rem; /* Tailwind: mb-4 */
+        }
+        .search-result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <img src="logo.png" alt="Logo" id="logo"> <!- Vložte si logo ->
-            <form id="search-form">
-                <input type="text" id="search-query" name="q" placeholder="Hledat...">
-                <button type="submit">Hledat</button>
-            </form>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto px-4 py-2 flex flex-col min-h-screen">
+        <header class="py-4">
+            <div class="flex items-center justify-between">
+                <img src="logo.png" alt="Logo" id="logo" class="h-10 mr-4"> <!-- Adjust size as needed -->
+                <form id="search-form" class="flex-grow max-w-2xl">
+                    <div class="flex">
+                        <input type="text" id="search-query" name="q" placeholder="Hledat..." class="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:ring-blue-500 focus:border-blue-500">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-r-md">Hledat</button>
+                    </div>
+                </form>
+            </div>
         </header>
 
-        <main>
-            <div id="ai-summary-container" style="display:none;">
-                <h2>AI Shrnutí (Gemini):</h2>
-                <div id="ai-summary" class="result-box">Načítám AI odpověď...</div>
+        <main class="flex-grow mt-2 flex flex-col lg:flex-row gap-6">
+            <!-- Left Column: AI Summary -->
+            <div id="ai-column" class="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-3 text-blue-700">AI Odpověď (Gemini):</h2>
+                <div id="ai-summary" class="result-box prose max-w-none">
+                    <!-- AI content will be streamed here -->
+                    <p class="text-gray-500">Zadejte dotaz pro zobrazení AI odpovědi.</p>
+                </div>
             </div>
 
-            <div id="google-results-container">
-                <h2>Výsledky vyhledávání:</h2>
-                <div id="google-results" class="result-box">Načítám výsledky...</div>
+            <!-- Right Column: Google Results -->
+            <div id="google-column" class="w-full lg:w-2/3 bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-3 text-gray-700">Výsledky vyhledávání:</h2>
+                <div id="google-results" class="result-box">
+                    <!-- Google search results will be displayed here -->
+                    <p class="text-gray-500">Zadejte dotaz pro zobrazení výsledků.</p>
+                </div>
             </div>
         </main>
+
+        <footer class="text-center py-4 mt-auto">
+            <p class="text-sm text-gray-500">&copy; 2024 Vaše Vyhledávání</p>
+        </footer>
     </div>
     <script src="script.js"></script>
+    <script>
+        // Simple loading indicator for AI, can be expanded
+        const aiSummaryDiv = document.getElementById('ai-summary');
+        const googleResultsDiv = document.getElementById('google-results');
+
+        function showAiLoading() {
+            aiSummaryDiv.innerHTML = '<p class="text-gray-500 animate-pulse">AI generuje odpověď...</p>';
+        }
+        function showGoogleLoading() {
+            googleResultsDiv.innerHTML = '<p class="text-gray-500 animate-pulse">Načítám výsledky...</p>';
+        }
+    </script>
 </body>
 </html>
